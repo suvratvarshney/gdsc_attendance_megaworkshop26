@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDSC NITC | Mega Workshop 26 Attendance</title>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- ZXing Browser QR Code Reader -->
+    <script src="https://unpkg.com/@zxing/browser@0.1.1/umd/zxing-browser.min.js"></script>
+    <!-- SheetJS (xlsx) for Genuine .xlsx Excel File Export Workshop-Wise -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+    <style>
+        :root {
+            /* Official Google Brand Colors */
+            --g-blue: #4285F4;
+            --g-blue-soft: #E8F0FE;
+            --g-red: #EA4335;
+            --g-red-soft: #FCE8E6;
+            --g-yellow: #FBBC04;
+            --g-yellow-soft: #FEF7E0;
+            --g-green: #34A853;
+            --g-green-soft: #E6F4EA;
+
+            /* Crisp Light Theme Palette */
+            --bg-page: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --bg-subtle: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+
+            --border-light: #E2E8F0;
+            --border-hover: #CBD5E1;
+
+            --radius-xl: 20px;
+            --radius-lg: 14px;
+            --radius-md: 10px;
+            --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image:
+                radial-gradient(circle at 8% 10%, rgba(66, 133, 244, 0.08) 0%, transparent 32%),
+                radial-gradient(circle at 92% 12%, rgba(234, 67, 53, 0.07) 0%, transparent 30%),
+                radial-gradient(circle at 88% 88%, rgba(52, 168, 83, 0.08) 0%, transparent 32%),
+                radial-gradient(circle at 12% 88%, rgba(251, 188, 4, 0.08) 0%, transparent 30%),
+                radial-gradient(#CBD5E1 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.42;
+            background-image:
+                repeating-linear-gradient(135deg, rgba(255,255,255,0.42) 0, rgba(255,255,255,0.42) 1px, transparent 1px, transparent 6px),
+                radial-gradient(circle at 30% 20%, rgba(66,133,244,0.10), transparent 24%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+        }
+
+        /* Top 4-Color Google Bar */
+        .google-top-strip {
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(90deg,
+                var(--g-blue) 0%, var(--g-blue) 25%,
+                var(--g-red) 25%, var(--g-red) 50%,
+                var(--g-yellow) 50%, var(--g-yellow) 75%,
+                var(--g-green) 75%, var(--g-green) 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Sticky Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 5px;
+            z-index: 900;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.055), inset 0 1px rgba(255,255,255,0.8);
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .gdsc-badge-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255,255,255,1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .brand-sub {
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .api-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            background: var(--g-yellow-soft);
+            color: #B06000;
+            border: 1px solid rgba(251, 188, 4, 0.45);
+        }
+
+        .api-status-pill.online {
+            background: var(--g-green-soft);
+            color: #137333;
+            border-color: rgba(52, 168, 83, 0.4);
+        }
+
+        .api-status-pill.error {
+            background: var(--g-red-soft);
+            color: #C5221F;
+            border-color: rgba(234, 67, 53, 0.4);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.86rem;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+            border: 1px solid transparent;
+            user-select: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            filter: saturate(112%);
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid rgba(66,133,244,0.20);
+            outline-offset: 2px;
+        }
+
+        .btn:active { transform: scale(0.98); }
+
+        .btn-blue {
+            background: var(--g-blue);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.28);
+        }
+        .btn-blue:hover { background: #3367D6; }
+
+        .btn-green {
+            background: var(--g-green);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(52, 168, 83, 0.25);
+        }
+        .btn-green:hover { background: #2D9249; }
+
+        .btn-red {
+            background: var(--g-red-soft);
+            color: #C5221F;
+            border-color: rgba(234, 67, 53, 0.3);
+        }
+        .btn-red:hover { background: #FAD2CF; }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.78);
+            color: var(--text-primary);
+            border-color: var(--border-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.055), inset 0 1px rgba(255,255,255,0.9);
+        }
+        .btn-outline:hover { background: var(--bg-subtle); }
+
+        .btn-sm {
+            padding: 7px 13px;
+            font-size: 0.78rem;
+            border-radius: 8px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 24px 24px 64px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Step 1: Configuration Card */
+        .config-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(248,250,252,0.68));
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(255,255,255,0.92);
+            border-radius: var(--radius-xl);
+            padding: 24px 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 18px 50px rgba(15,23,42,0.07), inset 0 1px rgba(255,255,255,0.95);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .config-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--g-blue), var(--g-green));
+        }
+
+        .config-card::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            top: -110px;
+            right: 8%;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(66,133,244,0.12), transparent 68%);
+        }
+
+        .config-card.collapsed { display: none; }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .card-head h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-badge {
+            background: var(--g-blue-soft);
+            color: var(--g-blue);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 99px;
+            text-transform: uppercase;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: 2fr 1.1fr 1.1fr 1fr;
+            gap: 16px;
+            align-items: end;
+        }
+
+        @media (max-width: 1024px) { .config-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) { .config-grid { grid-template-columns: 1fr; } }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 10px 14px;
+                gap: 8px;
+            }
+            .brand-wrap { gap: 8px; min-width: 0; }
+            .gdsc-badge-icon {
+                width: 38px;
+                height: 38px;
+                flex-shrink: 0;
+            }
+            .brand-title {
+                font-size: 0.95rem;
+                line-height: 1.15;
+            }
+            .brand-sub,
+            .api-status-pill {
+                display: none;
+            }
+            .container {
+                padding: 14px 12px 40px;
+            }
+            .config-card,
+            .workshop-ribbon,
+            .surface-panel {
+                border-radius: var(--radius-lg);
+                padding: 16px;
+            }
+            .config-card { margin-bottom: 14px; }
+            .workshop-ribbon,
+            .kpi-row { margin-bottom: 14px; }
+            .kpi-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .kpi-box { padding: 14px; }
+            .kpi-icon-circle {
+                width: 40px;
+                height: 40px;
+            }
+            .workspace-grid { gap: 14px; }
+            .manual-box { padding: 12px; }
+            #celebration-toast {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+            }
+            #wrong-qr-toast {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+            }
+            #duplicate-toast {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+            }
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 11px 14px;
+            background: rgba(241,245,249,0.72);
+            border: 1px solid rgba(203,213,225,0.82);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 0.88rem;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+
+        .input-control:focus {
+            outline: none;
+            background: #FFFFFF;
+            border-color: var(--g-blue);
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.15);
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.81rem;
+        }
+
+        .config-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* Workshop Switcher Bar */
+        .workshop-ribbon {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            background: rgba(255,255,255,0.70);
+            backdrop-filter: blur(18px) saturate(150%);
+            -webkit-backdrop-filter: blur(18px) saturate(150%);
+            border: 1px solid rgba(255,255,255,0.88);
+            border-radius: var(--radius-xl);
+            padding: 14px 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 14px 38px rgba(15,23,42,0.06), inset 0 1px rgba(255,255,255,0.9);
+        }
+
+        .ws-tabs-list {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .ws-pill {
+            padding: 8px 15px;
+            border-radius: 999px;
+            font-size: 0.83rem;
+            font-weight: 700;
+            background: rgba(241,245,249,0.78);
+            border: 1.5px solid transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.18s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: inset 0 1px rgba(255,255,255,0.7);
+        }
+
+        .ws-pill.active {
+            background: var(--g-blue-soft);
+            border-color: var(--g-blue);
+            color: #174EA6;
+        }
+
+        .ws-pill-count {
+            background: #FFFFFF;
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 99px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .ws-pill-wrap {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .ws-pill-delete {
+            width: 24px;
+            height: 24px;
+            margin-left: -4px;
+            border-radius: 50%;
+            border: 1px solid var(--border-light);
+            background: #FFFFFF;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ws-pill-delete:hover {
+            color: #C5221F;
+            border-color: var(--g-red);
+            background: var(--g-red-soft);
+        }
+
+        .inline-add-ws {
+            display: none;
+            align-items: center;
+            gap: 6px;
+        }
+        .inline-add-ws.show { display: inline-flex; }
+
+        /* KPI Cards */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-box {
+            background: linear-gradient(145deg, rgba(255,255,255,0.84), rgba(248,250,252,0.62));
+            backdrop-filter: blur(16px) saturate(145%);
+            -webkit-backdrop-filter: blur(16px) saturate(145%);
+            border: 1px solid rgba(255,255,255,0.90);
+            border-radius: var(--radius-lg);
+            padding: 18px 22px;
+            box-shadow: 0 12px 32px rgba(15,23,42,0.065), inset 0 1px rgba(255,255,255,0.92);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .kpi-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(203,213,225,0.82);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.09), inset 0 1px rgba(255,255,255,0.95);
+        }
+
+        .kpi-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+        .kpi-box.green::after { background: var(--g-green); }
+        .kpi-box.yellow::after { background: var(--g-yellow); }
+        .kpi-box.blue::after { background: var(--g-blue); }
+        .kpi-box.red::after { background: var(--g-red); }
+
+        .kpi-label {
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .kpi-number {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 3px;
+        }
+
+        .kpi-caption {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .kpi-icon-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .kpi-box.green .kpi-icon-circle { background: var(--g-green-soft); color: var(--g-green); }
+        .kpi-box.yellow .kpi-icon-circle { background: var(--g-yellow-soft); color: #D97706; }
+        .kpi-box.blue .kpi-icon-circle { background: var(--g-blue-soft); color: var(--g-blue); }
+        .kpi-box.red .kpi-icon-circle { background: var(--g-red-soft); color: var(--g-red); }
+
+        /* Workspace Grid */
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: minmax(520px, 0.95fr) minmax(420px, 1.05fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 1080px) { .workspace-grid { grid-template-columns: 1fr; } }
+
+        .surface-panel {
+            background: linear-gradient(145deg, rgba(255,255,255,0.82), rgba(248,250,252,0.64));
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(255,255,255,0.92);
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            box-shadow: 0 20px 48px rgba(15,23,42,0.07), inset 0 1px rgba(255,255,255,0.95);
+        }
+
+        @media (min-width: 1081px) {
+            .workspace-grid > .surface-panel:first-child {
+                justify-self: center;
+                width: 100%;
+            }
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .panel-header h3 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Camera Viewport */
+        .camera-stage {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            background: #0F172A;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 2px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 18px 38px rgba(15,23,42,0.16), inset 0 0 0 1px rgba(255,255,255,0.06);
+        }
+
+        video#video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scaleX(-1);
+        }
+
+        video#video.not-mirrored { transform: scaleX(1); }
+
+        .reticle-box {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .r-corner {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-color: #60A5FA;
+            border-style: solid;
+            border-width: 0;
+        }
+        .r-corner.tl { top: 0; left: 0; border-top-width: 4px; border-left-width: 4px; border-top-left-radius: 10px; }
+        .r-corner.tr { top: 0; right: 0; border-top-width: 4px; border-right-width: 4px; border-top-right-radius: 10px; }
+        .r-corner.bl { bottom: 0; left: 0; border-bottom-width: 4px; border-left-width: 4px; border-bottom-left-radius: 10px; }
+        .r-corner.br { bottom: 0; right: 0; border-bottom-width: 4px; border-right-width: 4px; border-bottom-right-radius: 10px; }
+
+        .scan-beam {
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4285F4, #34A853, transparent);
+            box-shadow: 0 0 12px #4285F4;
+            animation: moveBeam 2.2s infinite ease-in-out;
+            display: none;
+        }
+
+        .camera-stage.scanning .scan-beam { display: block; }
+
+        @keyframes moveBeam {
+            0% { top: 8%; opacity: 0.7; }
+            50% { top: 90%; opacity: 1; }
+            100% { top: 8%; opacity: 0.7; }
+        }
+
+        .camera-overlay-idle {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 75% 20%, rgba(66,133,244,0.25), transparent 32%),
+                linear-gradient(135deg, rgba(30,41,59,0.96) 0%, rgba(15,23,42,0.98) 100%);
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            z-index: 4;
+        }
+
+        .camera-stage.scanning .camera-overlay-idle { display: none; }
+
+        .scan-toggle-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(241,245,249,0.62);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.82);
+            padding: 9px 13px;
+            border-radius: var(--radius-md);
+            margin-bottom: 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            box-shadow: inset 0 1px rgba(255,255,255,0.72);
+        }
+
+        /* Status Card */
+        .status-card {
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            background: rgba(241,245,249,0.72);
+            border: 1.5px solid var(--border-light);
+            margin-top: 14px;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .status-card.success { background: var(--g-green-soft); border-color: var(--g-green); color: #0D652D; }
+        .status-card.duplicate { background: var(--g-yellow-soft); border-color: var(--g-yellow); color: #B06000; }
+        .status-card.error { background: var(--g-red-soft); border-color: var(--g-red); color: #C5221F; }
+
+        .status-flex {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .status-badge-circle {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .status-card.success .status-badge-circle { background: var(--g-green); color: #FFF; border-color: transparent; }
+        .status-card.duplicate .status-badge-circle { background: var(--g-yellow); color: #FFF; border-color: transparent; }
+        .status-card.error .status-badge-circle { background: var(--g-red); color: #FFF; border-color: transparent; }
+
+        #status {
+            font-size: 0.88rem;
+            line-height: 1.45;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-weight: 700;
+        }
+
+        .manual-box {
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* Live Table */
+        .table-controls {
+            margin-bottom: 14px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 520px;
+            overflow-y: auto;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            background: rgba(255,255,255,0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: inset 0 1px rgba(255,255,255,0.85);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        thead {
+            background: rgba(241,245,249,0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 13px 16px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        td {
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+            vertical-align: middle;
+        }
+
+        tbody tr:hover { background: #F8FAFC; }
+        tbody tr.flash-new { animation: flashGreen 1.8s ease-out; }
+
+        @keyframes flashGreen {
+            0% { background-color: var(--g-green-soft); }
+            100% { background-color: transparent; }
+        }
+
+        .tag-recorded {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            background: var(--g-green-soft);
+            color: #137333;
+        }
+
+        /* Celebration Toast */
+        #celebration-toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 22px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.84);
+            border: 2px solid var(--g-green);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16), inset 0 1px rgba(255,255,255,0.95);
+            color: var(--text-primary);
+            animation: slideUp 0.25s ease-out;
+            backdrop-filter: blur(18px) saturate(150%);
+            -webkit-backdrop-filter: blur(18px) saturate(150%);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(24px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        #wrong-qr-toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 22px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.84);
+            border: 2px solid var(--g-red);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16), inset 0 1px rgba(255,255,255,0.95);
+            color: var(--text-primary);
+            animation: slideUp 0.25s ease-out;
+            backdrop-filter: blur(18px) saturate(150%);
+            -webkit-backdrop-filter: blur(18px) saturate(150%);
+        }
+
+        #duplicate-toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 22px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.84);
+            border: 2px solid var(--g-yellow);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16), inset 0 1px rgba(255,255,255,0.95);
+            color: var(--text-primary);
+            animation: slideUp 0.25s ease-out;
+            backdrop-filter: blur(18px) saturate(150%);
+            -webkit-backdrop-filter: blur(18px) saturate(150%);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="google-top-strip"></div>
+    <!-- Header -->
+    <header>
+        <div class="brand-wrap">
+            <div class="gdsc-badge-icon">
+                <svg width="34" height="26" viewBox="0 0 950.62 464.86" fill="none" aria-label="Google Developer Student Clubs logo">
+                    <g stroke-linecap="round">
+                        <line x1="875.62" y1="232.57" x2="598" y2="389.86" stroke="#FBBC04" stroke-width="150"/>
+                        <line x1="875.62" y1="232.57" x2="607.08" y2="75" stroke="#34A853" stroke-width="150"/>
+                        <line x1="75" y1="232.57" x2="343.54" y2="75" stroke="#EA4335" stroke-width="150"/>
+                        <line x1="75" y1="232.57" x2="352.62" y2="389.86" stroke="#4285F4" stroke-width="150"/>
+                    </g>
+                </svg>
+            </div>
+            <div>
+                <div class="brand-title">
+                    <span style="color:var(--g-blue)">G</span><span style="color:var(--g-red)">D</span><span style="color:var(--g-yellow)">S</span><span style="color:var(--g-green)">C</span>
+                    <span>Mega Workshop 26 Attendance</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div id="api-pill" class="api-status-pill">
+                <span class="status-dot"></span>
+                <span id="api-pill-text">Backend Ready</span>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" id="btn-toggle-config">
+                &#9881; Setup Panel
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- CONFIGURATION CARD -->
+        <section class="config-card" id="config-drawer">
+            <div class="card-head">
+                <h2>
+                    <span class="step-badge">Step 1</span>
+                    <span>Backend &amp; Workshop Configuration</span>
+                </h2>
+                <span style="font-size:0.78rem; color:var(--text-secondary); font-weight:600;">
+                    Connected to NITC Google Apps Script (<code class="mono">/exec</code>)
+                </span>
+            </div>
+
+            <div class="config-grid">
+                <div class="field">
+                    <label for="apiUrl">Apps Script Web App URL</label>
+                    <input id="apiUrl" class="input-control mono" placeholder="https://script.google.com/macros/s/.../exec">
+                </div>
+
+                <div class="field">
+                    <label for="eventId">Workshop / Event ID</label>
+                    <input id="eventId" class="input-control mono" value="GDSCWORKSHOP26">
+                </div>
+
+                <div class="field">
+                    <label for="scannerName">Volunteer Name</label>
+                    <input id="scannerName" class="input-control" value="Suvrat">
+                </div>
+
+                <div class="field">
+                    <label for="accessCode">Access Code</label>
+                    <input id="accessCode" type="password" class="input-control mono" value="mega26" autocomplete="new-password" spellcheck="false">
+                </div>
+            </div>
+
+            <div class="config-footer">
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-outline" id="btn-test-api">&#128268; Test Backend</button>
+                    <button type="button" class="btn btn-blue" id="btn-focus-mode">Save &amp; Hide Setup &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORKSHOP TABS & EXCEL DOWNLOAD BAR -->
+        <div class="workshop-ribbon">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                <span style="font-size:0.76rem; font-weight:800; text-transform:uppercase; color:var(--text-secondary);">Workshops:</span>
+                <div class="ws-tabs-list" id="workshop-tabs"></div>
+
+                <div class="inline-add-ws" id="inline-add-ws">
+                    <input type="text" id="new-ws-input" class="input-control mono" placeholder="e.g. GDSC_AI_03" style="width:145px; padding:6px 10px; font-size:0.78rem;">
+                    <button type="button" class="btn btn-blue btn-sm" id="btn-confirm-add-ws">Add</button>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-cancel-add-ws">&times;</button>
+                </div>
+
+                <button type="button" class="btn btn-outline btn-sm" id="btn-show-add-ws">+ New Workshop</button>
+            </div>
+
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button type="button" class="btn btn-green btn-sm" id="btn-download-xlsx">
+                    &#128202; Download Excel Sheet (.xlsx)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" id="btn-download-csv">
+                    &#128196; Export CSV
+                </button>
+            </div>
+        </div>
+
+        <!-- KPI SUMMARY CARDS -->
+        <div class="kpi-row">
+            <div class="kpi-box green">
+                <div>
+                    <div class="kpi-label">Marked Present (Active)</div>
+                    <div class="kpi-number" id="kpi-present">0</div>
+                    <div class="kpi-caption" id="kpi-event-sub">Event: GDSCWORKSHOP26</div>
+                </div>
+                <div class="kpi-icon-circle">&#10003;</div>
+            </div>
+
+            <div class="kpi-box yellow">
+                <div>
+                    <div class="kpi-label">Duplicate Scans Blocked</div>
+                    <div class="kpi-number" id="kpi-duplicates">0</div>
+                    <div class="kpi-caption">Already verified</div>
+                </div>
+                <div class="kpi-icon-circle">&#9888;</div>
+            </div>
+
+            <div class="kpi-box blue">
+                <div>
+                    <div class="kpi-label">Total Across All Workshops</div>
+                    <div class="kpi-number" id="kpi-total-all">0</div>
+                    <div class="kpi-caption">Multi-tab workbook</div>
+                </div>
+                <div class="kpi-icon-circle">&#128202;</div>
+            </div>
+
+            <div class="kpi-box red">
+                <div>
+                    <div class="kpi-label">Latest Verified Scan</div>
+                    <div class="kpi-number mono" id="kpi-last-time" style="font-size:1.35rem;">--:--:--</div>
+                    <div class="kpi-caption" id="kpi-last-student">No scans yet</div>
+                </div>
+                <div class="kpi-icon-circle">&#9201;</div>
+            </div>
+        </div>
+
+        <!-- MAIN 2-COLUMN WORKSPACE -->
+        <div class="workspace-grid">
+
+            <!-- LEFT PANEL: CAMERA SCANNER -->
+            <div class="surface-panel">
+                <div class="panel-header">
+                    <h3>&#128247; Hostel App QR Scanner</h3>
+                    <span class="tag-recorded" id="cam-active-badge" style="display:none;">&#9679; LIVE CAMERA</span>
+                </div>
+
+                <div class="camera-stage" id="video-stage">
+                    <video id="video" autoplay muted playsinline></video>
+                    <div class="reticle-box">
+                        <div class="r-corner tl"></div>
+                        <div class="r-corner tr"></div>
+                        <div class="r-corner bl"></div>
+                        <div class="r-corner br"></div>
+                        <div class="scan-beam"></div>
+                    </div>
+                    <div class="camera-overlay-idle" id="camera-idle-msg">
+                        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" style="margin-bottom:10px;">
+                            <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
+                            <rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/><path d="M14 14h3v3h-3z"/>
+                        </svg>
+                        <div style="font-weight:800; font-size:0.96rem; margin-bottom:4px;">Camera Ready</div>
+                        <div style="font-size:0.78rem; color:#94A3B8; max-width:260px;">
+                            Click "Start Camera" and hold the student's NITC Hostel App QR inside the frame.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scan-toggle-strip">
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                        <input type="checkbox" id="continuousMode" checked style="accent-color:var(--g-blue); width:16px; height:16px;">
+                        <span>Continuous line-scanning (2s cooldown)</span>
+                    </label>
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                        <input type="checkbox" id="mirrorCamera" checked style="accent-color:var(--g-blue); width:16px; height:16px;">
+                        <span>Mirror view</span>
+                    </label>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="btn btn-blue" style="flex:1;" id="btn-start-cam">&#9654; Start Camera</button>
+                    <button type="button" class="btn btn-red" style="flex:1;" id="btn-stop-cam">&#9632; Stop Camera</button>
+                </div>
+
+                <!-- Status Card -->
+                <div class="status-card" id="status-card">
+                    <div class="status-flex">
+                        <div class="status-badge-circle" id="status-icon">&#128269;</div>
+                        <div style="flex:1;">
+                            <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-secondary); margin-bottom:2px; font-weight:800;">
+                                Live Backend Response
+                            </div>
+                            <div id="status">Ready. Test the backend or start the camera.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Fallback & Demo Simulator -->
+                <div class="manual-box">
+                    <label for="manualQr" style="display:block; font-size:0.74rem; font-weight:800; text-transform:uppercase; color:var(--text-secondary); margin-bottom:6px;">
+                        Manual Fallback (Student Email or QR Text)
+                    </label>
+                    <div style="display:flex; gap:8px;">
+                        <input id="manualQr" class="input-control mono" placeholder="student@nitc.ac.in">
+                        <button type="button" class="btn btn-green" id="btn-manual-submit">Mark</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: EXCEL SHEET -->
+            <div class="surface-panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>&#128203; Live Extracted Attendance Sheet</h3>
+                        <span style="font-size:0.76rem; color:var(--text-secondary); font-weight:600;" id="sheet-subtitle">
+                            Showing records for GDSCWORKSHOP26
+                        </span>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-clear-sheet">&#128465; Clear Tab</button>
+                    </div>
+                </div>
+
+                <div class="table-controls">
+                    <input type="text" id="sheetSearch" class="input-control" placeholder="Search scanned students by Name or Email...">
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Time</th>
+                                <th>Student Name</th>
+                                <th>Email / ID</th>
+                                <th>Event ID</th>
+                                <th>Volunteer</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sheet-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Celebration Toast -->
+    <div id="celebration-toast">
+        <div style="width:42px; height:42px; border-radius:12px; background:var(--g-green); color:#FFF; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">
+            &#10003;
+        </div>
+        <div>
+            <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--g-green); font-weight:800;">
+                Attendance Recorded
+            </div>
+            <div style="font-size:1rem; font-weight:800;" id="toast-student-name">Student Name</div>
+            <div style="font-size:0.78rem; color:var(--text-secondary);" id="toast-student-email">Aaj aalloo andar jakar Sona Bahar aayega</div>
+        </div>
+    </div>
+
+    <!-- Wrong QR Toast -->
+    <div id="wrong-qr-toast" role="alert" aria-live="assertive">
+        <div style="width:42px; height:42px; border-radius:12px; background:var(--g-red); color:#FFF; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">
+            &#10005;
+        </div>
+        <div>
+            <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--g-red); font-weight:800;">
+                Invalid QR Detected
+            </div>
+            <div style="font-size:1rem; font-weight:800;">This QR is not valid for attendance</div>
+            <div style="font-size:0.78rem; color:var(--text-secondary);">Please scan a valid NITC Hostel App QR</div>
+        </div>
+    </div>
+
+    <div id="duplicate-toast" role="alert" aria-live="assertive">
+        <div style="width:42px; height:42px; border-radius:12px; background:var(--g-yellow); color:#FFF; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800;">
+            &#9888;
+        </div>
+        <div>
+            <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.6px; color:#B06000; font-weight:800;">
+                Already Marked Present
+            </div>
+            <div style="font-size:1rem; font-weight:800;" id="duplicate-toast-name">Student</div>
+            <div style="font-size:0.78rem; color:var(--text-secondary);">Dubara daalne ki zarurat??</div>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = "gdsc_nitc_light_attendance_copy_v1";
+        const CONFIG_KEY = "gdsc_attendance_copy_config_v1";
+        let reader = null, controls = null, busy = false, clearConfirmPending = false;
+        let lastDecodedQr = "";
+        let lastDecodedAt = 0;
+
+        let store = {
+            activeEventId: "GDSCWORKSHOP26",
+            workshops: {
+                "GDSCWORKSHOP26": { eventId: "GDSCWORKSHOP26", records: [], duplicates: 0 },
+                "GDSC_WEB_01": { eventId: "GDSC_WEB_01", records: [], duplicates: 0 },
+                "GDSC_CLOUD_02": { eventId: "GDSC_CLOUD_02", records: [], duplicates: 0 }
+            }
+        };
+
+        function loadStore() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && parsed.workshops) {
+                        const normalizedWorkshops = {};
+                        Object.entries(parsed.workshops).forEach(([key, ws]) => {
+                            if (!ws || typeof ws !== "object") return;
+                            const eventId = String(ws.eventId || key).trim().toUpperCase();
+                            if (!eventId) return;
+                            normalizedWorkshops[eventId] = {
+                                eventId,
+                                records: Array.isArray(ws.records) ? ws.records.filter(r => r && typeof r === "object").map(r => ({
+                                    sno: Number(r.sno) || 0,
+                                    date: String(r.date || ""),
+                                    time: String(r.time || ""),
+                                    name: String(r.name || "Verified Student"),
+                                    email: String(r.email || ""),
+                                    qrRaw: String(r.qrRaw || ""),
+                                    eventId: String(r.eventId || eventId),
+                                    scannerName: String(r.scannerName || "Volunteer"),
+                                    status: String(r.status || "RECORDED")
+                                })) : [],
+                                duplicates: Number.isFinite(Number(ws.duplicates)) ? Math.max(0, Number(ws.duplicates)) : 0
+                            };
+                        });
+                        if (Object.keys(normalizedWorkshops).length > 0) {
+                            store.workshops = normalizedWorkshops;
+                            const parsedActiveEventId = normalizeEventId(parsed.activeEventId || parsed.activeWorkshop || "");
+                            store.activeEventId = normalizedWorkshops[parsedActiveEventId]
+                                ? parsedActiveEventId
+                                : Object.keys(normalizedWorkshops)[0];
+                        }
+                        document.getElementById("eventId").value = store.activeEventId;
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function loadSavedConfig() {
+            try {
+                const raw = localStorage.getItem(CONFIG_KEY);
+                if (!raw) return;
+                const saved = JSON.parse(raw);
+                if (saved.apiUrl) document.getElementById("apiUrl").value = String(saved.apiUrl);
+                if (saved.eventId) document.getElementById("eventId").value = String(saved.eventId);
+                if (saved.scannerName) document.getElementById("scannerName").value = String(saved.scannerName);
+                if (typeof saved.accessCode === "string") document.getElementById("accessCode").value = saved.accessCode;
+            } catch (_) {}
+        }
+
+        function saveSavedConfig() {
+            try {
+                const c = config();
+                localStorage.setItem(CONFIG_KEY, JSON.stringify({
+                    apiUrl: c.apiUrl,
+                    eventId: c.eventId,
+                    scannerName: c.scannerName,
+                    accessCode: c.accessCode
+                }));
+            } catch (_) {}
+        }
+
+        function saveStore() {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); } catch (e) {}
+        }
+
+        function ensureWorkshopExists(eventId) {
+            const cleanId = normalizeEventId(eventId || "GDSCWORKSHOP26");
+            if (!store.workshops[cleanId]) {
+                store.workshops[cleanId] = { eventId: cleanId, records: [], duplicates: 0 };
+            }
+            return cleanId;
+        }
+
+        function normalizeEventId(eventId) {
+            return String(eventId || "")
+                .trim()
+                .toUpperCase()
+                .replace(/\s+/g, "_")
+                .replace(/[^A-Z0-9_-]/g, "");
+        }
+
+        function status(message, type = "") {
+            const el = document.getElementById("status");
+            const card = document.getElementById("status-card");
+            const icon = document.getElementById("status-icon");
+            el.textContent = message;
+            card.className = "status-card " + (type || "");
+            icon.innerHTML = type === "success" ? "&#10003;" : type === "duplicate" ? "&#9888;" : type === "error" ? "&#10005;" : "&#128269;";
+        }
+
+        function config() {
+            return {
+                apiUrl: document.getElementById("apiUrl").value.trim(),
+                eventId: document.getElementById("eventId").value.trim(),
+                scannerName: document.getElementById("scannerName").value.trim(),
+                accessCode: document.getElementById("accessCode").value
+            };
+        }
+
+        function isValidAppsScriptUrl(url) {
+            try {
+                const parsed = new URL(url);
+                return parsed.protocol === "https:" &&
+                    (parsed.hostname === "script.google.com" || parsed.hostname.endsWith(".script.google.com") || parsed.hostname === "script.googleusercontent.com");
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function hasValidAccessCode() {
+            return config().accessCode.trim().length > 0;
+        }
+
+        function rejectInvalidAccessCode() {
+            playInvalidQrBuzzer();
+            status("Enter an access code before connecting or scanning.", "error");
+            toggleConfigDrawer(false);
+            document.getElementById("accessCode").focus();
+        }
+
+        function toggleConfigDrawer(forceHide = false) {
+            const drawer = document.getElementById("config-drawer");
+            if (forceHide === true) drawer.classList.add("collapsed");
+            else drawer.classList.toggle("collapsed");
+        }
+
+        async function testApi() {
+            const c = config();
+            const pill = document.getElementById("api-pill");
+            const pillText = document.getElementById("api-pill-text");
+            if (!hasValidAccessCode()) {
+                rejectInvalidAccessCode();
+                pill.className = "api-status-pill error";
+                pillText.textContent = "Invalid Access Code";
+                return;
+            }
+            if (!c.apiUrl) { status("Enter your deployed Apps Script /exec URL.", "error"); return; }
+            if (!isValidAppsScriptUrl(c.apiUrl)) {
+                status("Invalid server URL: paste the full https://script.google.com/.../exec Web App URL.", "error");
+                pill.className = "api-status-pill error";
+                pillText.textContent = "Invalid Server URL";
+                return;
+            }
+            status("Testing API connection to Apps Script…");
+            pill.className = "api-status-pill";
+            pillText.textContent = "Testing API…";
+            try {
+                const response = await fetch(c.apiUrl, { method: "GET", redirect: "follow" });
+                saveSavedConfig();
+                status("✓ Endpoint responded with HTTP " + response.status + ". Backend is ready!", "success");
+                pill.className = "api-status-pill online";
+                pillText.textContent = "Apps Script Online (HTTP " + response.status + ")";
+                playBeep(780, 0.12);
+            } catch (error) {
+                status("API test failed: cannot reach this URL. Use the deployed Apps Script /exec URL and set access to Anyone.", "error");
+                pill.className = "api-status-pill error";
+                pillText.textContent = "API Error";
+            }
+        }
+
+        async function startScanner() {
+            if (!window.ZXingBrowser) { status("ZXing library failed to load.", "error"); return; }
+            if (!hasValidAccessCode()) {
+                rejectInvalidAccessCode();
+                return;
+            }
+            stopScanner();
+            try {
+                reader = new ZXingBrowser.BrowserQRCodeReader();
+                status("Requesting camera permission…");
+                document.getElementById("video-stage").classList.add("scanning");
+                document.getElementById("cam-active-badge").style.display = "inline-flex";
+                const video = document.getElementById("video");
+                const onDecode = (result) => {
+                    if (result && !busy) {
+                        const qrText = String(result.getText() || "").trim();
+                        if (!qrText) return;
+                        const now = Date.now();
+                        const isRepeated = qrText === lastDecodedQr && (now - lastDecodedAt) < 2500;
+                        if (isRepeated) return;
+                        lastDecodedQr = qrText;
+                        lastDecodedAt = now;
+                        if (!document.getElementById("continuousMode").checked) stopScanner();
+                        submitAttendance(qrText);
+                    }
+                };
+                if (typeof reader.decodeFromConstraints === "function") {
+                    controls = await reader.decodeFromConstraints({
+                        video: {
+                            facingMode: { ideal: "environment" },
+                            width: { ideal: 1280 },
+                            height: { ideal: 720 }
+                        },
+                        audio: false
+                    }, video, onDecode);
+                } else {
+                    controls = await reader.decodeFromVideoDevice(undefined, video, onDecode);
+                }
+                status("Camera active! Point at student QR.");
+            } catch (error) {
+                document.getElementById("video-stage").classList.remove("scanning");
+                document.getElementById("cam-active-badge").style.display = "none";
+                status("Camera error: " + error.message, "error");
+            }
+        }
+
+        function stopScanner() {
+            if (controls) { try { controls.stop(); } catch (_) {} controls = null; }
+            if (reader) { try { reader.reset(); } catch (_) {} }
+            const video = document.getElementById("video");
+            if (video && video.srcObject) { video.srcObject.getTracks().forEach(t => t.stop()); video.srcObject = null; }
+            document.getElementById("video-stage").classList.remove("scanning");
+            document.getElementById("cam-active-badge").style.display = "none";
+        }
+
+        async function submitAttendance(qrText) {
+            if (busy) return;
+            const c = config();
+            if (!qrText || !qrText.trim()) { status("Please provide student QR text.", "error"); return; }
+            if (!hasValidAccessCode()) {
+                rejectInvalidAccessCode();
+                return;
+            }
+            if (!c.apiUrl || !c.eventId || !c.scannerName || !c.accessCode) {
+                status("Please fill in Step 1 configuration details.", "error");
+                toggleConfigDrawer(false);
+                document.getElementById("accessCode").focus();
+                return;
+            }
+            if (!isValidAppsScriptUrl(c.apiUrl)) {
+                status("Invalid server URL: paste the full https://script.google.com/.../exec Web App URL.", "error");
+                toggleConfigDrawer(false);
+                document.getElementById("apiUrl").focus();
+                return;
+            }
+            busy = true;
+            status("Submitting attendance to backend…");
+            try {
+                const rawQr = String(qrText);
+                const payload = {
+                    qrText: rawQr,
+                    qr: rawQr,
+                    qrCode: rawQr,
+                    eventId: c.eventId,
+                    scannerName: c.scannerName,
+                    accessCode: c.accessCode
+                };
+                const response = await fetch(c.apiUrl, {
+                    method: "POST",
+                    redirect: "follow",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
+                });
+                const responseText = await response.text();
+                saveSavedConfig();
+                let data;
+                try {
+                    data = responseText ? JSON.parse(responseText) : {};
+                } catch (_) {
+                    data = { status: "MESSAGE", message: responseText || "Backend returned a non-JSON response" };
+                }
+                if (!response.ok) {
+                    data = { status: "SERVER_ERROR", message: String(data.message || data.error || "HTTP " + response.status), httpStatus: response.status };
+                }
+                processBackendResult(data, qrText.trim(), c);
+            } catch (error) {
+                playTryAgain();
+                status("Server URL/CORS error: cannot reach the deployed Apps Script. Paste the Web App /exec URL and deploy it for Anyone.", "error");
+            } finally {
+                setTimeout(() => { busy = false; }, 2000);
+            }
+        }
+
+        function processBackendResult(data, rawQrText, c) {
+            data = data && typeof data === "object" ? data : {};
+            if (data.data && typeof data.data === "object") {
+                data = { ...data.data, ...data };
+            }
+            const evKey = ensureWorkshopExists(c.eventId);
+            store.activeEventId = evKey;
+            const ws = store.workshops[evKey];
+            const nowStr = new Date().toLocaleTimeString();
+            const dateStr = new Date().toLocaleDateString();
+            const backendStatus = String(data.status || data.result || "").toUpperCase();
+            const backendMessage = String(data.message || data.error || "").toLowerCase();
+            const duplicateStatuses = new Set([
+                "DUPLICATE", "ALREADY_RECORDED", "ALREADY_MARKED",
+                "ALREADY_PRESENT", "DUPLICATE_SCAN", "SCAN_ALREADY_RECORDED"
+            ]);
+            const duplicateStatus = duplicateStatuses.has(backendStatus) ||
+                (backendStatus.startsWith("ALREADY") && !backendStatus.includes("INVALID"));
+            const duplicateMessage = /duplicate|already (marked|recorded|present)|has already|already exists/.test(backendMessage);
+            const unauthorizedStatus = /ACCESS_DENIED|UNAUTHORIZED|FORBIDDEN|INVALID_ACCESS_CODE/.test(backendStatus);
+            const unauthorizedMessage = /access denied|unauthorized|forbidden|invalid access code/.test(backendMessage);
+            const serverKeyStatus = /INVALID_SERVER_KEY|SERVER_KEY|WRONG_SERVER_KEY/.test(backendStatus);
+            const serverKeyMessage = /invalid server key|incorrect server key|wrong server key|server key.*(invalid|incorrect|wrong|not valid|rejected)/.test(backendMessage);
+            const wrongQrStatuses = new Set([
+                "INVALID_QR", "INVALID", "NOT_FOUND", "UNKNOWN_QR",
+                "NOT_REGISTERED", "STUDENT_NOT_FOUND", "UNREGISTERED",
+                "ERROR_INVALID_QR"
+            ]);
+            const wrongQrMessage = /wrong qr|invalid qr|unknown qr|qr.*invalid|qr.*not.*found|not.*found.*qr|not.*registered|student.*not.*found|no student|unregistered|qr code.*(valid|recognized|found)/.test(backendMessage);
+            const successStatus = new Set(["RECORDED", "SUCCESS", "OK", "PRESENT", "MARKED_PRESENT"]).has(backendStatus);
+            const successResult = data.recorded === true || data.success === true;
+            const plainSuccessMessage =
+                /(recorded|attendance marked|marked present|successfully|success\b)/.test(backendMessage) &&
+                !/(invalid|error|failed|duplicate|already|denied|unauthorized|forbidden)/.test(backendMessage);
+            const student = data.student && typeof data.student === "object" ? data.student : {};
+            const studentName = student.name || data.studentName || data.student_name || data.name || "Verified Student";
+            const studentEmail = student.email || data.studentEmail || data.student_email || data.email || rawQrText;
+
+            if (serverKeyStatus || serverKeyMessage) {
+                playInvalidQrBuzzer();
+                status("Server key rejected: use the deployed Apps Script /exec URL for this backend.", "error");
+                toggleConfigDrawer(false);
+                document.getElementById("apiUrl").focus();
+            } else if (unauthorizedStatus || unauthorizedMessage) {
+                playInvalidQrBuzzer();
+                const serverMessage = String(data.message || data.error || "").trim();
+                status(serverMessage
+                    ? "Server rejected the request: " + serverMessage
+                    : "Server rejected access code \"" + c.accessCode + "\". Verify that the Apps Script accepts the submitted accessCode parameter.", "error");
+                toggleConfigDrawer(false);
+                document.getElementById("accessCode").focus();
+            } else if (plainSuccessMessage) {
+                const alreadyInThisTab = ws.records.some(record => record.qrRaw && record.qrRaw === rawQrText);
+                if (alreadyInThisTab) {
+                    playDuplicateBuzzer();
+                    ws.duplicates = (ws.duplicates || 0) + 1;
+                    saveStore();
+                    refreshUI();
+                    status("Dubara daalne ki zarurat??", "duplicate");
+                    showDuplicateToast("Verified Student");
+                    return;
+                }
+                playMarioSuccess();
+                status("Your attendance has been recorded, Verified Student", "success");
+                const nextSno = ws.records.reduce((max, record) => Math.max(max, Number(record.sno) || 0), 0) + 1;
+                ws.records.unshift({ sno: nextSno, date: dateStr, time: nowStr, name: "Verified Student", email: rawQrText, qrRaw: rawQrText, eventId: evKey, scannerName: c.scannerName || "Volunteer", status: "RECORDED" });
+                saveStore();
+                refreshUI();
+                showCelebrationToast("Verified Student", rawQrText);
+            } else if (duplicateStatus || duplicateMessage) {
+                playDuplicateBuzzer();
+                ws.duplicates = (ws.duplicates || 0) + 1;
+                saveStore();
+                refreshUI();
+                status(String(studentName) + " - Dubara daalne ki zarurat??", "duplicate");
+                showDuplicateToast(String(studentName));
+            } else if (successStatus || successResult || plainSuccessMessage) {
+                const alreadyInThisTab = ws.records.some(record => record.qrRaw && record.qrRaw === rawQrText);
+                if (alreadyInThisTab) {
+                    playDuplicateBuzzer();
+                    ws.duplicates = (ws.duplicates || 0) + 1;
+                    saveStore();
+                    refreshUI();
+                    status(String(studentName) + " - Dubara daalne ki zarurat??", "duplicate");
+                    showDuplicateToast(String(studentName));
+                    return;
+                }
+                playMarioSuccess();
+                status("Your attendance has been recorded, " + studentName, "success");
+                const nextSno = ws.records.reduce((max, record) => Math.max(max, Number(record.sno) || 0), 0) + 1;
+                ws.records.unshift({ sno: nextSno, date: dateStr, time: nowStr, name: String(studentName), email: String(studentEmail), qrRaw: rawQrText, eventId: evKey, scannerName: c.scannerName || "Volunteer", status: "RECORDED" });
+                saveStore();
+                refreshUI();
+                showCelebrationToast(studentName, studentEmail);
+            } else if (wrongQrStatuses.has(backendStatus) || wrongQrMessage) {
+                playInvalidQrBuzzer();
+                status("Invalid QR detected - please scan a valid Hostel App QR", "error");
+                showWrongQrToast();
+            } else if (backendStatus === "SERVER_ERROR" || backendStatus === "HTTP_ERROR") {
+                playTryAgain();
+                status("Backend request failed: " + (backendMessage || "Unknown server error"), "error");
+            } else {
+                const possibleInvalidQr = /ERROR|FAIL|FAILED|NOT_OK/.test(backendStatus) ||
+                    /invalid|wrong|unknown|not found|not recognized|unregistered/.test(backendMessage);
+                if (possibleInvalidQr) {
+                    playInvalidQrBuzzer();
+                    status("Invalid QR detected - please scan a valid Hostel App QR", "error");
+                    showWrongQrToast();
+                } else {
+                    playDuplicateBuzzer();
+                    status("Dubara daalne ki zarurat??", "error");
+                }
+            }
+        }
+
+        function switchWorkshopTab(eventId) {
+            store.activeEventId = eventId;
+            document.getElementById("eventId").value = eventId;
+            saveStore();
+            refreshUI();
+        }
+
+        function deleteWorkshop(eventId) {
+            if (Object.keys(store.workshops).length <= 1) {
+                status("At least one workshop must remain.", "error");
+                return;
+            }
+            if (!window.confirm(`Delete workshop "${eventId}" and all its attendance records?`)) return;
+            delete store.workshops[eventId];
+            if (store.activeEventId === eventId) {
+                store.activeEventId = Object.keys(store.workshops)[0];
+                document.getElementById("eventId").value = store.activeEventId;
+            }
+            saveStore();
+            refreshUI();
+            status("Workshop deleted: " + eventId);
+        }
+
+        function refreshUI() {
+            renderWorkshopPills();
+            renderKPIs();
+            renderTable();
+        }
+
+        function renderWorkshopPills() {
+            const list = document.getElementById("workshop-tabs");
+            list.innerHTML = "";
+            Object.values(store.workshops).forEach(ws => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "ws-pill " + (ws.eventId === store.activeEventId ? "active" : "");
+                const label = document.createElement("span");
+                label.textContent = ws.eventId;
+                const count = document.createElement("span");
+                count.className = "ws-pill-count";
+                count.textContent = ws.records.length;
+                btn.append(label, count);
+                btn.addEventListener("click", () => switchWorkshopTab(ws.eventId));
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.type = "button";
+                deleteBtn.className = "ws-pill-delete";
+                deleteBtn.title = "Delete workshop";
+                deleteBtn.textContent = "\u00d7";
+                deleteBtn.addEventListener("click", () => deleteWorkshop(ws.eventId));
+
+                const wrap = document.createElement("div");
+                wrap.className = "ws-pill-wrap";
+                wrap.append(btn, deleteBtn);
+                list.appendChild(wrap);
+            });
+        }
+
+        function renderKPIs() {
+            const ws = store.workshops[store.activeEventId] || { records: [], duplicates: 0 };
+            const totalAll = Object.values(store.workshops).reduce((sum, w) => sum + w.records.length, 0);
+            document.getElementById("kpi-present").textContent = ws.records.length;
+            document.getElementById("kpi-duplicates").textContent = ws.duplicates || 0;
+            document.getElementById("kpi-total-all").textContent = totalAll;
+            document.getElementById("kpi-event-sub").textContent = "Event: " + store.activeEventId;
+            document.getElementById("sheet-subtitle").textContent = `Showing ${ws.records.length} verified records for ${store.activeEventId}`;
+
+            if (ws.records.length > 0) {
+                document.getElementById("kpi-last-time").textContent = ws.records[0].time;
+                document.getElementById("kpi-last-student").textContent = ws.records[0].name;
+            } else {
+                document.getElementById("kpi-last-time").textContent = "--:--:--";
+                document.getElementById("kpi-last-student").textContent = "No scans yet";
+            }
+        }
+
+        function renderTable() {
+            const ws = store.workshops[store.activeEventId] || { records: [] };
+            const q = document.getElementById("sheetSearch").value.trim().toLowerCase();
+            const tbody = document.getElementById("sheet-tbody");
+            tbody.innerHTML = "";
+
+            const filtered = ws.records.filter(r => !q || r.name.toLowerCase().includes(q) || r.email.toLowerCase().includes(q));
+            if (filtered.length === 0) {
+                const tr = document.createElement("tr");
+                const td = document.createElement("td");
+                td.colSpan = 7;
+                td.style.cssText = "text-align:center; padding:35px; color:var(--text-muted); font-weight:600;";
+                td.append("No attendance records in ", store.activeEventId, " yet.");
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+                return;
+            }
+
+            filtered.forEach((rec, index) => {
+                const tr = document.createElement("tr");
+                if (index === 0) tr.className = "flash-new";
+                const sno = document.createElement("td");
+                sno.className = "mono";
+                sno.style.cssText = "color:var(--text-secondary); font-weight:700;";
+                sno.textContent = rec.sno;
+                const time = document.createElement("td");
+                time.className = "mono";
+                time.style.cssText = "color:var(--g-blue); font-weight:700;";
+                time.textContent = rec.time;
+                const name = document.createElement("td");
+                name.style.fontWeight = "800";
+                name.textContent = rec.name;
+                const email = document.createElement("td");
+                email.className = "mono";
+                email.style.color = "var(--text-secondary)";
+                email.textContent = rec.email;
+                const event = document.createElement("td");
+                const eventBadge = document.createElement("span");
+                eventBadge.className = "mono";
+                eventBadge.style.cssText = "background:var(--bg-subtle); padding:4px 8px; border-radius:6px; font-weight:700;";
+                eventBadge.textContent = rec.eventId;
+                event.appendChild(eventBadge);
+                const volunteer = document.createElement("td");
+                volunteer.style.cssText = "color:var(--text-secondary); font-weight:600;";
+                volunteer.textContent = rec.scannerName;
+                const statusCell = document.createElement("td");
+                const statusBadge = document.createElement("span");
+                statusBadge.className = "tag-recorded";
+                statusBadge.textContent = "\u2713 " + rec.status;
+                statusCell.appendChild(statusBadge);
+                tr.append(sno, time, name, email, event, volunteer, statusCell);
+                tbody.appendChild(tr);
+            });
+        }
+
+        function downloadExcelWorkbook() {
+            if (typeof XLSX === "undefined") { downloadActiveCSV(); return; }
+            const wb = XLSX.utils.book_new();
+            Object.values(store.workshops).forEach(ws => {
+                const rows = ws.records.slice().reverse().map((r, i) => ({
+                    "S.No": i + 1, "Date": r.date, "Scan Time": r.time, "Student Name": r.name, "Student Email": r.email, "Workshop ID": r.eventId, "Verified By": r.scannerName, "Status": r.status
+                }));
+                const sheet = rows.length > 0 ? XLSX.utils.json_to_sheet(rows) : XLSX.utils.aoa_to_sheet([["S.No", "Date", "Scan Time", "Student Name", "Student Email", "Workshop ID", "Verified By", "Status"]]);
+                sheet["!cols"] = [{ wch: 6 }, { wch: 12 }, { wch: 12 }, { wch: 24 }, { wch: 30 }, { wch: 18 }, { wch: 16 }, { wch: 14 }];
+                XLSX.utils.book_append_sheet(wb, sheet, ws.eventId.substring(0, 31).replace(/[\\/?*[\]]/g, "_"));
+            });
+            XLSX.writeFile(wb, `GDSC_NITC_Attendance_${store.activeEventId}_${new Date().toISOString().slice(0,10)}.xlsx`);
+        }
+
+        function downloadActiveCSV() {
+            const ws = store.workshops[store.activeEventId] || { records: [] };
+            const headers = ["S.No", "Date", "Time", "Student Name", "Student Email", "Event ID", "Volunteer", "Status"];
+            const escapeCsv = value => {
+                let text = String(value ?? "");
+                if (/^[=+\-@]/.test(text)) text = "'" + text;
+                return '"' + text.replace(/"/g, '""') + '"';
+            };
+            const rows = ws.records.slice().reverse().map((r, idx) => [
+                idx + 1, r.date, r.time, r.name, r.email, r.eventId, r.scannerName, r.status
+            ]);
+            const csv = "\ufeff" + [headers, ...rows].map(row => row.map(escapeCsv).join(",")).join("\r\n");
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+            link.download = `${store.activeEventId}_Attendance.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+        }
+
+        let toastTimer = null;
+        let wrongQrToastTimer = null;
+        let duplicateToastTimer = null;
+
+        function showCelebrationToast(name, email) {
+            const t = document.getElementById("celebration-toast");
+            document.getElementById("toast-student-name").textContent = name;
+            document.getElementById("toast-student-name").previousElementSibling.textContent = "Your attendance has been recorded";
+            document.getElementById("toast-student-email").textContent = "Aaj aalloo andar jakar Sona Bahar aayega";
+            document.getElementById("wrong-qr-toast").style.display = "none";
+            document.getElementById("duplicate-toast").style.display = "none";
+            t.style.display = "flex";
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { t.style.display = "none"; }, 3400);
+        }
+
+        function showWrongQrToast() {
+            const t = document.getElementById("wrong-qr-toast");
+            document.getElementById("celebration-toast").style.display = "none";
+            document.getElementById("duplicate-toast").style.display = "none";
+            t.style.display = "flex";
+            clearTimeout(wrongQrToastTimer);
+            wrongQrToastTimer = setTimeout(() => { t.style.display = "none"; }, 4000);
+        }
+
+        function showDuplicateToast(studentName) {
+            const t = document.getElementById("duplicate-toast");
+            document.getElementById("celebration-toast").style.display = "none";
+            document.getElementById("wrong-qr-toast").style.display = "none";
+            document.getElementById("duplicate-toast-name").textContent = studentName || "Student";
+            t.style.display = "flex";
+            clearTimeout(duplicateToastTimer);
+            duplicateToastTimer = setTimeout(() => { t.style.display = "none"; }, 4000);
+        }
+
+        let attendanceAudioContext = null;
+        let activeAudioNodes = [];
+
+        function stopActiveAudio() {
+            activeAudioNodes.forEach((osc) => {
+                try { osc.stop(); } catch (_) {}
+            });
+            activeAudioNodes = [];
+        }
+
+        async function getAttendanceAudioContext() {
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContextClass) return null;
+                if (!attendanceAudioContext || attendanceAudioContext.state === "closed") {
+                    attendanceAudioContext = new AudioContextClass();
+                }
+                if (attendanceAudioContext.state === "suspended") {
+                    await attendanceAudioContext.resume();
+                }
+                return attendanceAudioContext;
+            } catch (_) {
+                return null;
+            }
+        }
+
+        function playBeep(freq = 880, duration = 0.14) {
+            getAttendanceAudioContext().then((ctx) => {
+                if (!ctx) return;
+                stopActiveAudio();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                activeAudioNodes.push(osc);
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration + 0.02);
+            });
+        }
+
+        function playMarioSuccess() {
+            getAttendanceAudioContext().then((ctx) => {
+                if (!ctx) return;
+                stopActiveAudio();
+                const notes = [
+                    [659.25, 0.00, 0.09],
+                    [783.99, 0.10, 0.09],
+                    [987.77, 0.20, 0.09],
+                    [1318.51, 0.34, 0.18],
+                    [987.77, 0.54, 0.08],
+                    [1318.51, 0.65, 0.22]
+                ];
+                notes.forEach(([frequency, delay, duration]) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    const start = ctx.currentTime + delay;
+                    osc.type = "square";
+                    osc.frequency.setValueAtTime(frequency, start);
+                    gain.gain.setValueAtTime(0.0001, start);
+                    gain.gain.exponentialRampToValueAtTime(0.09, start + 0.015);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    activeAudioNodes.push(osc);
+                    osc.start(start);
+                    osc.stop(start + duration + 0.02);
+                });
+            });
+        }
+
+        function playTryAgain() {
+            getAttendanceAudioContext().then((ctx) => {
+                if (!ctx) return;
+                stopActiveAudio();
+                [330, 246.94, 196].forEach((frequency, index) => {
+                    const start = ctx.currentTime + index * 0.12;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = "triangle";
+                    osc.frequency.setValueAtTime(frequency, start);
+                    gain.gain.setValueAtTime(0.0001, start);
+                    gain.gain.exponentialRampToValueAtTime(0.07, start + 0.01);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.1);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    activeAudioNodes.push(osc);
+                    osc.start(start);
+                    osc.stop(start + 0.11);
+                });
+            });
+        }
+
+        function playDuplicateBuzzer() {
+            getAttendanceAudioContext().then((ctx) => {
+                if (!ctx) return;
+                stopActiveAudio();
+                [220, 180, 220].forEach((frequency, index) => {
+                    const start = ctx.currentTime + index * 0.16;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = "square";
+                    osc.frequency.setValueAtTime(frequency, start);
+                    gain.gain.setValueAtTime(0.0001, start);
+                    gain.gain.exponentialRampToValueAtTime(0.12, start + 0.015);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.13);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    activeAudioNodes.push(osc);
+                    osc.start(start);
+                    osc.stop(start + 0.14);
+                });
+            });
+        }
+
+        function playInvalidQrBuzzer() {
+            getAttendanceAudioContext().then((ctx) => {
+                if (!ctx) return;
+                stopActiveAudio();
+                [180, 150, 110].forEach((frequency, index) => {
+                    const start = ctx.currentTime + index * 0.13;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = "sawtooth";
+                    osc.frequency.setValueAtTime(frequency, start);
+                    gain.gain.setValueAtTime(0.0001, start);
+                    gain.gain.exponentialRampToValueAtTime(0.14, start + 0.012);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.11);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    activeAudioNodes.push(osc);
+                    osc.start(start);
+                    osc.stop(start + 0.12);
+                });
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadStore();
+            loadSavedConfig();
+            refreshUI();
+
+            document.addEventListener("pointerdown", () => {
+                getAttendanceAudioContext();
+            }, { once: true });
+
+            document.getElementById("btn-toggle-config").addEventListener("click", () => toggleConfigDrawer(false));
+            document.getElementById("btn-focus-mode").addEventListener("click", () => toggleConfigDrawer(true));
+            document.getElementById("btn-test-api").addEventListener("click", testApi);
+
+            const eventIdInput = document.getElementById("eventId");
+            const commitEventId = () => {
+                const val = normalizeEventId(eventIdInput.value);
+                if (!val) {
+                    eventIdInput.value = store.activeEventId;
+                    return;
+                }
+                eventIdInput.value = ensureWorkshopExists(val);
+                store.activeEventId = val;
+                saveStore();
+                refreshUI();
+            };
+            eventIdInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    commitEventId();
+                    eventIdInput.blur();
+                }
+            });
+            eventIdInput.addEventListener("blur", commitEventId);
+
+            const inlineBox = document.getElementById("inline-add-ws");
+            const showAddBtn = document.getElementById("btn-show-add-ws");
+            const newWsInput = document.getElementById("new-ws-input");
+
+            showAddBtn.addEventListener("click", () => { inlineBox.classList.add("show"); showAddBtn.style.display = "none"; newWsInput.focus(); });
+            document.getElementById("btn-cancel-add-ws").addEventListener("click", () => { inlineBox.classList.remove("show"); showAddBtn.style.display = "inline-flex"; newWsInput.value = ""; });
+            document.getElementById("btn-confirm-add-ws").addEventListener("click", () => {
+                const val = normalizeEventId(newWsInput.value);
+                if (val) switchWorkshopTab(ensureWorkshopExists(val));
+                inlineBox.classList.remove("show"); showAddBtn.style.display = "inline-flex"; newWsInput.value = "";
+            });
+            newWsInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    document.getElementById("btn-confirm-add-ws").click();
+                }
+            });
+
+            document.getElementById("btn-download-xlsx").addEventListener("click", downloadExcelWorkbook);
+            document.getElementById("btn-download-csv").addEventListener("click", downloadActiveCSV);
+            document.getElementById("btn-start-cam").addEventListener("click", startScanner);
+            document.getElementById("btn-stop-cam").addEventListener("click", stopScanner);
+            document.getElementById("mirrorCamera").addEventListener("change", (e) => {
+                document.getElementById("video").classList.toggle("not-mirrored", !e.target.checked);
+            });
+            ["apiUrl", "eventId", "scannerName", "accessCode"].forEach((id) => {
+                const input = document.getElementById(id);
+                input.addEventListener("change", saveSavedConfig);
+                input.addEventListener("blur", saveSavedConfig);
+            });
+
+            document.getElementById("btn-manual-submit").addEventListener("click", () => {
+                const input = document.getElementById("manualQr");
+                submitAttendance(input.value);
+                input.value = "";
+            });
+
+            document.getElementById("manualQr").addEventListener("keydown", (e) => {
+                if (e.key === "Enter") { e.preventDefault(); submitAttendance(e.target.value); e.target.value = ""; }
+            });
+
+            document.getElementById("sheetSearch").addEventListener("input", renderTable);
+
+            const clearBtn = document.getElementById("btn-clear-sheet");
+            clearBtn.addEventListener("click", () => {
+                if (!clearConfirmPending) {
+                    clearConfirmPending = true;
+                    clearBtn.textContent = "Click Again to Confirm";
+                    clearBtn.classList.add("btn-red");
+                    setTimeout(() => { clearConfirmPending = false; clearBtn.innerHTML = "&#128465; Clear Tab"; clearBtn.classList.remove("btn-red"); }, 3000);
+                } else {
+                    store.workshops[store.activeEventId].records = [];
+                    store.workshops[store.activeEventId].duplicates = 0;
+                    saveStore();
+                    refreshUI();
+                    clearConfirmPending = false;
+                    clearBtn.innerHTML = "&#128465; Clear Tab";
+                    clearBtn.classList.remove("btn-red");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
